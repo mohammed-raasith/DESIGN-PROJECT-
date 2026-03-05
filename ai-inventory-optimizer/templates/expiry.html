@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block header_title %}Expiry & Shelf-Life Monitoring{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+    <h2 class="text-lg font-bold text-gray-800 mb-4">Near-Expiry Items Timeline</h2>
+    <div class="relative pt-4">
+        <!-- Timeline Line -->
+        <div class="absolute left-0 top-1/2 w-full h-1 bg-gray-200 -translate-y-1/2 rounded tracking-line"></div>
+
+        <div class="flex justify-between relative mt-4">
+            <!-- Node Critical -->
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full bg-red-500 border-4 border-white shadow z-10"></div>
+                <div class="mt-2 text-center">
+                    <span class="text-xs font-bold text-red-600 block">&lt; 7 Days</span>
+                    <span class="text-xl font-bold text-gray-800">3</span>
+                    <span class="text-xs text-gray-500 block">Items</span>
+                </div>
+            </div>
+
+            <!-- Node Warning -->
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full bg-orange-400 border-4 border-white shadow z-10"></div>
+                <div class="mt-2 text-center">
+                    <span class="text-xs font-bold text-orange-500 block">&lt; 15 Days</span>
+                    <span class="text-xl font-bold text-gray-800">8</span>
+                    <span class="text-xs text-gray-500 block">Items</span>
+                </div>
+            </div>
+
+            <!-- Node Safe -->
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full bg-green-500 border-4 border-white shadow z-10"></div>
+                <div class="mt-2 text-center">
+                    <span class="text-xs font-bold text-green-600 block">30+ Days</span>
+                    <span class="text-xl font-bold text-gray-800">1,237</span>
+                    <span class="text-xs text-gray-500 block">Items</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 bg-gray-50">
+        <h2 class="text-lg font-bold text-gray-800">Items at Risk</h2>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
+                    <th class="p-4 font-medium">Item Name</th>
+                    <th class="p-4 font-medium">Batch No.</th>
+                    <th class="p-4 font-medium">Qty</th>
+                    <th class="p-4 font-medium">Expiry Date</th>
+                    <th class="p-4 font-medium">Status</th>
+                    <th class="p-4 font-medium">Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm divide-y divide-gray-100">
+                <tr class="hover:bg-gray-50">
+                    <td class="p-4 font-medium text-gray-800">Chemical Reagent A</td>
+                    <td class="p-4 text-gray-500">BR-9021</td>
+                    <td class="p-4 text-gray-800">15</td>
+                    <td class="p-4 font-medium text-red-600">2026-03-07</td>
+                    <td class="p-4">
+                        <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs font-bold">Critical</span>
+                    </td>
+                    <td class="p-4">
+                        <button class="text-blue-600 hover:text-blue-800 font-medium">Mark for clearance</button>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="p-4 font-medium text-gray-800">Organic Lubricant</td>
+                    <td class="p-4 text-gray-500">OL-404</td>
+                    <td class="p-4 text-gray-800">55</td>
+                    <td class="p-4 font-medium text-orange-600">2026-03-15</td>
+                    <td class="p-4">
+                        <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs font-bold">Warning</span>
+                    </td>
+                    <td class="p-4">
+                        <button class="text-blue-600 hover:text-blue-800 font-medium">Prioritize use</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

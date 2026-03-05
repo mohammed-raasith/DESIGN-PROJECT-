@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block header_title %}AI Predictions & Insights{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Forecast Chart -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Aggregate Demand Forecast</h2>
+            <select class="text-sm border border-gray-300 rounded px-2 py-1 text-gray-600 bg-white">
+                <option>Next 7 Days</option>
+                <option>Next 30 Days</option>
+            </select>
+        </div>
+        <div class="relative flex-1 w-full min-h-[300px]">
+            <canvas id="predictionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">AI Reorder Recommendations</h2>
+        <div class="space-y-4">
+            <!-- Rec Item -->
+            <div class="p-4 border border-blue-100 bg-blue-50 rounded-lg flex justify-between items-center">
+                <div>
+                    <h4 class="font-bold text-gray-800">Steel Pipes 20mm</h4>
+                    <p class="text-sm text-gray-600">Predicted Demand (7d): <span class="font-bold">120</span> units</p>
+                    <div class="mt-2 text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded inline-block">
+                        Confidence: 94%
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-gray-500">Recommended ROQ</div>
+                    <div class="text-2xl font-bold text-blue-600">150</div>
+                    <button
+                        class="mt-2 text-sm bg-white border border-gray-300 px-3 py-1 rounded hover:bg-gray-50 transition-colors">Approve</button>
+                </div>
+            </div>
+            <!-- Rec Item -->
+            <div class="p-4 border border-blue-100 bg-blue-50 rounded-lg flex justify-between items-center">
+                <div>
+                    <h4 class="font-bold text-gray-800">Industrial Bearings</h4>
+                    <p class="text-sm text-gray-600">Predicted Demand (7d): <span class="font-bold">45</span> units</p>
+                    <div class="mt-2 text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded inline-block">
+                        Confidence: 88%
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-gray-500">Recommended ROQ</div>
+                    <div class="text-2xl font-bold text-blue-600">60</div>
+                    <button
+                        class="mt-2 text-sm bg-white border border-gray-300 px-3 py-1 rounded hover:bg-gray-50 transition-colors">Approve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('predictionChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Predicted Volume',
+                    data: [350, 420, 380, 500, 600, 450, 400],
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f3f4f6'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

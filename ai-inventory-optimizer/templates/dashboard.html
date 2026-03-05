@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block header_title %}Overview Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <!-- Stat Card 1 -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-medium text-gray-500 mb-1">Total Items</p>
+                <h3 class="text-3xl font-bold text-gray-800">1,248</h3>
+            </div>
+            <div class="p-2 bg-blue-50 rounded-lg text-blue-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="mt-4 flex items-center text-sm">
+            <span class="text-green-500 font-medium flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18">
+                    </path>
+                </svg>
+                2.4%
+            </span>
+            <span class="text-gray-400 ml-2">vs last month</span>
+        </div>
+    </div>
+
+    <!-- Stat Card 2 -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-medium text-gray-500 mb-1">Health Score</p>
+                <h3 class="text-3xl font-bold text-green-500">92%</h3>
+            </div>
+            <div class="p-2 bg-green-50 rounded-lg text-green-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="mt-4 flex items-center text-sm">
+            <span class="text-gray-400">Inventory condition optimal</span>
+        </div>
+    </div>
+
+    <!-- Stat Card 3 -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-medium text-gray-500 mb-1">Low Stock Alerts</p>
+                <h3 class="text-3xl font-bold text-orange-500">14</h3>
+            </div>
+            <div class="p-2 bg-orange-50 rounded-lg text-orange-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <div class="mt-4 flex items-center text-sm">
+            <span class="text-red-500 font-medium flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18">
+                    </path>
+                </svg>
+                5 new
+            </span>
+            <span class="text-gray-400 ml-2">needs attention</span>
+        </div>
+    </div>
+
+    <!-- Stat Card 4 -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-sm font-medium text-gray-500 mb-1">Expiry Warnings</p>
+                <h3 class="text-3xl font-bold text-red-500">3</h3>
+            </div>
+            <div class="p-2 bg-red-50 rounded-lg text-red-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="mt-4 flex items-center text-sm">
+            <span class="text-gray-400">&lt; 7 days to expire</span>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Chart Section -->
+    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold text-gray-800">Demand Forecast (Next 7 Days)</h2>
+            <button class="text-sm text-blue-600 hover:text-blue-700 font-medium">View detailed report</button>
+        </div>
+        <div class="relative h-72 w-full">
+            <canvas id="forecastChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Alerts Panel -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Recent Alerts</h2>
+        <div class="space-y-4">
+            <!-- Alert Item -->
+            <div class="flex items-start gap-4 p-3 rounded-lg bg-red-50 border border-red-100">
+                <span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-red-500 block"></span>
+                <div>
+                    <h4 class="text-sm font-bold text-red-800">Critical Expiry</h4>
+                    <p class="text-xs text-red-600 mt-1">Item 'Chemical Reagent A' expires in 2 days.</p>
+                </div>
+            </div>
+            <!-- Alert Item -->
+            <div class="flex items-start gap-4 p-3 rounded-lg bg-orange-50 border border-orange-100">
+                <span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-orange-500 block"></span>
+                <div>
+                    <h4 class="text-sm font-bold text-orange-800">Low Stock</h4>
+                    <p class="text-xs text-orange-600 mt-1">Item 'Steel Pipes' below Reorder Point.</p>
+                </div>
+            </div>
+            <!-- Alert Item -->
+            <div class="flex items-start gap-4 p-3 rounded-lg bg-blue-50 border border-blue-100">
+                <span class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-blue-500 block"></span>
+                <div>
+                    <h4 class="text-sm font-bold text-blue-800">Overstock Notice</h4>
+                    <p class="text-xs text-blue-600 mt-1">Item 'Plastic Wrapping' exceeds 2x predicted demand.</p>
+                </div>
+            </div>
+        </div>
+        <button
+            class="w-full mt-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+            View All Alerts
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('forecastChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+                datasets: [{
+                    label: 'Predicted Demand',
+                    data: [120, 135, 125, 145, 160, 150, 170],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f3f4f6',
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block header_title %}Supplier Analytics{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Supplier Performance Chart -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">On-Time Delivery Performance</h2>
+        <div class="relative h-64 w-full">
+            <canvas id="supplierChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Top Suppliers List -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col">
+        <div class="p-6 border-b border-gray-100">
+            <h2 class="text-lg font-bold text-gray-800">Supplier Reliability Scores</h2>
+        </div>
+        <div class="flex-1 overflow-y-auto">
+            <ul class="divide-y divide-gray-100">
+                <li class="p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                            AS
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Acme Steel Corp</h4>
+                            <p class="text-xs text-gray-500">Lead Time: 1.2 Days (Avg)</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-lg font-bold text-green-500">98%</span>
+                        <p class="text-xs text-gray-500">Reliability</p>
+                    </div>
+                </li>
+                <li class="p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold">
+                            PG
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">PolyGroup Plastics</h4>
+                            <p class="text-xs text-gray-500">Lead Time: 3.5 Days (Avg)</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-lg font-bold text-orange-500">82%</span>
+                        <p class="text-xs text-gray-500">Reliability</p>
+                    </div>
+                </li>
+                <li class="p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center font-bold">
+                            GI
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Global Imports Ltd</h4>
+                            <p class="text-xs text-gray-500">Lead Time: 7.0 Days (Avg)</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-lg font-bold text-red-500">65%</span>
+                        <p class="text-xs text-gray-500 text-red-600">High Risk</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('supplierChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['On Time', '1-2 Days Late', '> 3 Days Late'],
+                datasets: [{
+                    data: [85, 10, 5],
+                    backgroundColor: [
+                        '#10b981', // green
+                        '#f59e0b', // orange
+                        '#ef4444'  // red
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    });
+</script>
+{% endblock %}
